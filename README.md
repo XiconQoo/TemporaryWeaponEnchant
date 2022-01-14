@@ -4,7 +4,7 @@
 
 ---
 
-## [v1.00-Release Download Here](https://github.com/XiconQoo/TemporaryWeaponEnchant/releases/download/v1.00-Release/TemporaryWeaponEnchant_v1.00-Release.zip)
+## [v1.00-Release Download Here](https://github.com/XiconQoo/TemporaryWeaponEnchant/releases/download/v1.0-Release/TempWeapEnchant-v1.0-Release.zip)
 
 ###### <a target="_blank" rel="noopener noreferrer" href="https://www.paypal.me/xiconqoo/10"><img src="https://raw.githubusercontent.com/XiconQoo/Gladdy/readme-media/Paypal-Donate.png" height="30" style="margin-top:-30px;position:relative;top:20px;"></a> Please consider donating if you like my work
 
