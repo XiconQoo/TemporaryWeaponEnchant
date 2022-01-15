@@ -1,10 +1,9 @@
 ## Interface: 20503
-## Title: TempWeapEnchant
+## Title: TemporaryWeaponEnchant
 ## Version: 1.0
 ## Notes: Shows Spell Icon on TempEnchant Buffs instead of Weapon Icon
 ## Author: XiconQoo, DnB_Junkee, Knall, Xyz
-## SavedVariables: TempWeapEnchantSV
-## OptionalDeps:
+## OptionalDeps: Lorti-UI-Classic, ElvUI, TukUI
 
 spellList.lua
-TempWeapEnchant.lua
+TemporaryWeaponEnchant.lua
