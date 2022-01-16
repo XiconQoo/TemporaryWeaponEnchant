@@ -1,8 +1,8 @@
 local _, addonTable = ...
 
 if (not IsAddOnLoaded("Lorti-UI-Classic")) then
-    TempEnchant1Icon:SetMask("Interface\\AddOns\\TempWeaponEnchant\\images\\mask")
-    TempEnchant2Icon:SetMask("Interface\\AddOns\\TempWeaponEnchant\\images\\mask")
+    TempEnchant1Icon:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
+    TempEnchant2Icon:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
 end
 
 if (IsAddOnLoaded("ElvUI")) then
