@@ -4,7 +4,7 @@
 
 ---
 
-## [v1.03-Release Download Here](https://github.com/XiconQoo/TemporaryWeaponEnchant/releases/download/v1.03-Release/TemporaryWeaponEnchant-v1.03-Release.zip)
+## [v1.04-Release Download Here](https://github.com/XiconQoo/TemporaryWeaponEnchant/releases/download/v1.04-Release/TemporaryWeaponEnchant-v1.04-Release.zip)
 
 ###### <a target="_blank" rel="noopener noreferrer" href="https://www.paypal.me/xiconqoo/10"><img src="https://raw.githubusercontent.com/XiconQoo/Gladdy/readme-media/Paypal-Donate.png" height="30" style="margin-top:-30px;position:relative;top:20px;"></a> Please consider donating if you like my work
 
@@ -24,6 +24,10 @@ Currently changes icon to
 - **Xyz** (thanks for suggestion and testing)
 
 ### Changes
+
+### v1.04-Release
+
+- refactor and cleanup
 
 ### v1.03-Release
 
