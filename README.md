@@ -25,6 +25,11 @@ Currently changes icon to
 
 ### Changes
 
+### v1.02-Release
+
+- performance fix
+- mask fix
+
 ### v1.01-Release
 
 - changed Folder Name
