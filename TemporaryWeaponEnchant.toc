@@ -1,6 +1,7 @@
-## Interface: 20503
+## Interface: 20504
+## Interface-Wrath: 30400
 ## Title: TemporaryWeaponEnchant
-## Version: 1.0
+## Version: 1.02
 ## Notes: Shows Spell Icon on TempEnchant Buffs instead of Weapon Icon
 ## Author: XiconQoo, DnB_Junkee, Knall, Xyz
 ## OptionalDeps: Lorti-UI-Classic, ElvUI, TukUI
