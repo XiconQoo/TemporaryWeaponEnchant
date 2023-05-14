@@ -25,6 +25,10 @@ Currently changes icon to
 
 ### Changes
 
+### v1.03-Release
+
+- fix for elvui not showing expiration
+
 ### v1.02-Release
 
 - performance fix

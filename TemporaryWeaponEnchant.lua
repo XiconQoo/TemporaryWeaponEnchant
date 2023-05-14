@@ -15,8 +15,8 @@ end
 if (IsAddOnLoaded("ElvUI")) then
     local E = unpack(ElvUI):GetModule('Auras')
     local oldFunc = E.UpdateTempEnchant
-    E.UpdateTempEnchant = function(self, button, index)
-        oldFunc(self, button, index)
+    E.UpdateTempEnchant = function(self, button, index, expiration)
+        oldFunc(self, button, index, expiration)
         local is2 = string.match(button:GetName(), '2$')
         local is1 = string.match(button:GetName(), '1$')
         local hasMainHandEnchant,_,_,mainHandEnchantID,hasOffHandEnchant,_,_, offHandEnchantID = GetWeaponEnchantInfo()
