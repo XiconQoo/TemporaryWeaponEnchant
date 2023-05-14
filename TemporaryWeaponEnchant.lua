@@ -1,16 +1,33 @@
 local _, addonTable = ...
 
 local IsAddOnLoaded = IsAddOnLoaded
-local TempEnchant1Icon = _G["TempEnchant1Icon"]
-local TempEnchant2Icon = _G["TempEnchant2Icon"]
 local unpack = unpack
 local hooksecurefunc = hooksecurefunc
 local GetWeaponEnchantInfo = GetWeaponEnchantInfo
+local textures = {}
 
-if (not IsAddOnLoaded("Lorti-UI-Classic")) then
-    TempEnchant1Icon:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
-    TempEnchant2Icon:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
+local function createTexture(name)
+    local texture = _G[name]:CreateTexture(nil, "ARTWORK")
+    texture:SetSize(_G[name.."Icon"]:GetSize())
+    for i=1, _G[name.."Icon"]:GetNumPoints() do
+        texture:SetPoint(_G[name.."Icon"]:GetPoint(i))
+    end
+    texture:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
+    return texture
 end
+
+textures["mainhand"] = createTexture("TempEnchant2")
+textures["offhand"] = createTexture("TempEnchant1")
+
+local function resetTexture(texture)
+    texture:SetTexture(nil)
+    texture.textureActive = nil
+    texture.id = nil
+end
+
+------------------------------
+--- Elv- and TukUI
+------------------------------
 
 if (IsAddOnLoaded("ElvUI")) then
     local E = unpack(ElvUI):GetModule('Auras')
@@ -43,34 +60,13 @@ if IsAddOnLoaded("TukUI") then
     end
 end
 
-local MHTex, OHTex
-if not MHTex then
-    MHTex = TempEnchant2:CreateTexture(nil, "ARTWORK")
-    MHTex:SetSize(TempEnchant2Icon:GetSize())
-    for i=1, TempEnchant2Icon:GetNumPoints() do
-        MHTex:SetPoint(TempEnchant2Icon:GetPoint(i))
-    end
-    MHTex:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
-end
+------------------------------
+--- Blizzard
+------------------------------
 
-if not OHTex then
-    OHTex = TempEnchant1:CreateTexture(nil, "ARTWORK")
-    OHTex:SetSize(TempEnchant1Icon:GetSize())
-    for i=1, TempEnchant1Icon:GetNumPoints() do
-        OHTex:SetPoint(TempEnchant1Icon:GetPoint(i))
-    end
-    OHTex:SetMask("Interface\\AddOns\\TemporaryWeaponEnchant\\images\\mask")
-end
+local function UpdateTempEnchant(hasMainHandEnchant, mainHandEnchantID, hasOffHandEnchant, offHandEnchantID)
 
-local function reset(texture)
-    texture:SetTexture(nil)
-    texture.textureActive = nil
-    texture.id = nil
-end
-local function TemporaryEnchantFrame_Update_Hook(...)
-    local hasMainHandEnchant,_,_,mainHandEnchantID,hasOffHandEnchant,_,_, offHandEnchantID = ...
-
-    local mhTexture = hasOffHandEnchant and MHTex or OHTex
+    local mhTexture = hasOffHandEnchant and textures["mainhand"] or textures["offhand"]
 
     if hasMainHandEnchant then
         if addonTable.spells[mainHandEnchantID] and (not mhTexture.id or mhTexture.id ~= mainHandEnchantID) then
@@ -78,22 +74,26 @@ local function TemporaryEnchantFrame_Update_Hook(...)
             mhTexture.id = mainHandEnchantID
             mhTexture.textureActive = true
         elseif not addonTable.spells[mainHandEnchantID] and mhTexture.textureActive then
-            reset(mhTexture)
+            resetTexture(mhTexture)
         end
     elseif not hasMainHandEnchant and mhTexture.textureActive then
-        reset(mhTexture)
+        resetTexture(mhTexture)
     end
+
     if hasOffHandEnchant then
-        if addonTable.spells[offHandEnchantID] and (not OHTex.id or OHTex.id ~= offHandEnchantID) then
-            OHTex:SetTexture(addonTable.spells[offHandEnchantID])
-            OHTex.textureActive = true
-            OHTex.id = offHandEnchantID
-        elseif not addonTable.spells[offHandEnchantID] and OHTex.textureActive then
-            reset(OHTex)
+        if addonTable.spells[offHandEnchantID] and (not textures["offhand"].id or textures["offhand"].id ~= offHandEnchantID) then
+            textures["offhand"]:SetTexture(addonTable.spells[offHandEnchantID])
+            textures["offhand"].textureActive = true
+            textures["offhand"].id = offHandEnchantID
+        elseif not addonTable.spells[offHandEnchantID] and textures["offhand"].textureActive then
+            resetTexture(textures["offhand"])
         end
-    elseif not hasOffHandEnchant and mhTexture ~= OHTex and OHTex.textureActive then
-        reset(OHTex)
+    elseif not hasOffHandEnchant and mhTexture ~= textures["offhand"] and textures["offhand"].textureActive then
+        resetTexture(textures["offhand"])
     end
 end
-_G["TemporaryEnchantFrame_Update_Hook"] = TemporaryEnchantFrame_Update_Hook
-hooksecurefunc("TemporaryEnchantFrame_Update", _G["TemporaryEnchantFrame_Update_Hook"])
+
+hooksecurefunc("TemporaryEnchantFrame_Update", function(...)
+    local hasMainHandEnchant, _, _, mainHandEnchantID, hasOffHandEnchant, _, _, offHandEnchantID = ...
+    UpdateTempEnchant(hasMainHandEnchant, mainHandEnchantID, hasOffHandEnchant, offHandEnchantID)
+end)
