@@ -1,22 +1,17 @@
 local _, addonTable = ...
 
-local GetSpellInfo, select, ipairs = GetSpellInfo, select, ipairs
-
 addonTable.spells = {}
-local function spells(textureId, textureIsItem, enchantIds)
+local function spells(spellId, textureIsItem, enchantIds)
     for _,v in ipairs(enchantIds) do
         if textureIsItem then
-            local item = Item:CreateFromItemID(textureId)
-            item:ContinueOnItemLoad(function()
-                addonTable.spells[v] = item:GetItemIcon()
-            end)
+            addonTable.spells[v] = GetItemIcon(spellId)
         else
-            addonTable.spells[v] = select(3, GetSpellInfo(textureId))
+            addonTable.spells[v] = GetSpellTexture(spellId)
         end
     end
 end
 
--- see https://wow.tools/dbc/?dbc=spellitemenchantment&build=2.5.3.41750#page=1 to find the enchantIds
+-- see https://wago.tools/db2/SpellItemEnchantment?build=1.15.1.53623 to find the enchantIds
 
 ---Poisons
 spells(3408, false, {22, 603}) -- Crippling Poison
@@ -49,7 +44,7 @@ spells(8232, false, {283, 284, 525, 1669, 2636, 3785, 3786, 3787}) -- Windfury W
 spells(8227, false, {124, 285, 543, 1683, 2637}) -- Flametongue Totem
 spells(8024, false, {5, 4, 3, 523, 1665, 1666, 2634, 3779, 3780, 3781}) -- Flametongue Weapon
 spells(8033, false, {2, 12, 524, 1667, 1668, 2635, 3782, 3783, 3784}) -- Frostbrand Weapon
-spells(51730, false, {3345, 3346, 3347, 3348, 3349, 3350}) -- Earthliving Weapon
+spells(51730, false, {3345, 3346, 3347, 3348, 3349, 3350, 6910, 6985}) -- Earthliving Weapon
 spells(8017, false, {
     29, 3021, 3022, 3023, --Rank1
     6, 3024, 3025, 3026, --Rank2
@@ -62,7 +57,7 @@ spells(8017, false, {
     2633, 3018, 3019, 3020 --Rank9
 }) -- Rockbiter weapon
 --- Druid SOD
-spells(407977, false, {7141}) -- Wild Strikes
+spells(407977, false, {7141, 6858}) -- Wild Strikes
 --- Misc
 spells(211845, true, {7098}) -- Blackfathom Sharpening Stone
 spells(29452, false, {2712}) -- Fel Sharpening Stone
