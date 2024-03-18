@@ -97,7 +97,7 @@ if (IsAddOnLoaded("ElvUI")) then
         oldFunc(self, button, index, expiration)
         local is2 = string.match(button:GetName(), '2$')
         local is1 = string.match(button:GetName(), '1$')
-        local hasMainHandEnchant,_,_,mainHandEnchantID,hasOffHandEnchant,_,_, offHandEnchantID = GetWeaponEnchantInfo()
+        local hasMainHandEnchant, _, _, mainHandEnchantID, hasOffHandEnchant, _, _, offHandEnchantID = GetWeaponEnchantInfo()
         if is1 and hasMainHandEnchant and addonTable.spells[mainHandEnchantID] then
             button.texture:SetTexture(addonTable.spells[mainHandEnchantID])
         end
@@ -110,7 +110,7 @@ elseif IsAddOnLoaded("TukUI") then
     local oldFunc = T.Auras.UpdateTempEnchant
     T.Auras.UpdateTempEnchant = function(self, slot)
         oldFunc(self, slot)
-        local hasMainHandEnchant,_,_,mainHandEnchantID,hasOffHandEnchant,_,_, offHandEnchantID = GetWeaponEnchantInfo()
+        local hasMainHandEnchant, _, _, mainHandEnchantID, hasOffHandEnchant, _, _, offHandEnchantID = GetWeaponEnchantInfo()
         if slot == 16 and hasMainHandEnchant and addonTable.spells[mainHandEnchantID] then
             self.Icon:SetTexture(addonTable.spells[mainHandEnchantID])
         elseif slot ~= 16 and hasOffHandEnchant and addonTable.spells[offHandEnchantID] then
@@ -119,4 +119,4 @@ elseif IsAddOnLoaded("TukUI") then
     end
 else
     hooksecurefunc("TemporaryEnchantFrame_Update", UpdateTempEnchant)
-    end
+end
