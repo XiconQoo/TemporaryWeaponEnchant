@@ -7,7 +7,7 @@ local GetWeaponEnchantInfo = GetWeaponEnchantInfo
 local textures = {}
 
 local function createTexture(name)
-    local texture = _G[name]:CreateTexture(nil, "BACKGROUND")
+    local texture = _G[name]:CreateTexture(name.."SpellIcon", "BACKGROUND", nil, 1)
     texture:SetSize(_G[name.."Icon"]:GetSize())
     for i=1, _G[name.."Icon"]:GetNumPoints() do
         texture:SetPoint(_G[name.."Icon"]:GetPoint(i))
